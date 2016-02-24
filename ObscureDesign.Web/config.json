@@ -1,0 +1,35 @@
+﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Environment-Specific"
+    }
+  },
+
+  "Pages": {
+    "Home": "home",
+    "Navigation": [
+      {
+        "Title": "main",
+        "Items": [
+          { "Title": "Home", "Page": "home" },
+          {
+            "Title": "Articles",
+            "Group": [
+              { "Title": "Newest", "Page": "new" },
+              { "Title": "Best", "Page": "best" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Verbose",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}
