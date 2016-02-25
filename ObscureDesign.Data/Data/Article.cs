@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace ObscureDesign.Data
         [Required]
         [MaxLength(100)]
         public string Title { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Slug{ get; set; }
 
         [Required]
         public string Abstract { get; set; }
@@ -35,6 +40,15 @@ namespace ObscureDesign.Data
 
         public ICollection<ArticleTag> ArticleTags { get; set; }
 
-        //TODO: QR code
+        //TODO: QR code      
+    }
+
+    public static class ArticleExtensions
+    {
+        public static ModelBuilder BuildArticle(this ModelBuilder builder)
+        {
+            builder.Entity<Article>().HasIndex(a => a.Slug).IsUnique();
+            return builder;
+        }
     }
 }

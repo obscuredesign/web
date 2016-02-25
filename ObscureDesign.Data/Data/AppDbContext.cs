@@ -16,7 +16,8 @@ namespace ObscureDesign.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.BuildArticleTag()
+            builder.BuildArticle()
+                   .BuildArticleTag()
                    .BuildTag();
         }
     }
