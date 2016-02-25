@@ -33,5 +33,6 @@ namespace ObscureDesign.Data
         Trolled = 0x08,
         Cancer = 0x16,
         Dickbutt = 0x32,
+        BlastFromThePast = 0x64,
     }
 }
