@@ -6,14 +6,9 @@ using Microsoft.AspNet.Mvc;
 
 namespace ObscureDesign.Management.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Error()
+        public IActionResult Create()
         {
             return View();
         }

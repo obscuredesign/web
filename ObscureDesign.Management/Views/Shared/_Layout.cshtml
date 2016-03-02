@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ObscureDesign.Management</title>
+    <title>obscure.design :: Management :: @ViewData["Title"]</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,13 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand">ObscureDesign.Management</a>
+                <a href="http://localhost:5055/" class="navbar-brand">obscure.design</a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">management site</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Article" asp-action="Create">Create article</a></li>
+                    <li><a asp-controller="Article" asp-action="List">Manage articles</a></li>
+                    <li><a asp-controller="User" asp-action="List">Manage users</a></li>
                 </ul>
             </div>
         </div>
@@ -41,7 +42,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2016 - ObscureDesign.Management</p>
+            <p>obscure.design copyleft 2016 - inf</p>
         </footer>
     </div>
 

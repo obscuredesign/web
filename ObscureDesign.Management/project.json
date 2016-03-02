@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.1-beta",
   "description": "obscure.desgin management web pages",
   "authors": [ "Jiří Veselka", "Jan Petřvalský" ],
@@ -27,11 +27,12 @@
     "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final"
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
+    "ObscureDesign.Data": "0.1-beta"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "web": "Microsoft.AspNet.Hosting"
   },
 
   "frameworks": {
