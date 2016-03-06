@@ -32,7 +32,8 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting"
+    "web": "Microsoft.AspNet.Hosting",
+    "ef": "EntityFramework.Commands"
   },
 
   "frameworks": {

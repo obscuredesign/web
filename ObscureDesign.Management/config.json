@@ -1,4 +1,10 @@
 ﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Environment-Specific"
+    }
+  },
+
   "Logging": {
     "IncludeScopes": false,
     "LogLevel": {

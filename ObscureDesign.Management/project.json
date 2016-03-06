@@ -5,11 +5,11 @@
   "projectUrl": "https://github.com/obscuredesign/web",
   "licenseUrl": "https://github.com/obscuredesign/web/blob/master/LICENSE",
 
+  "userSecretsId": "aspnet5-ObscureDesign.Management-20160224093704",
+
   "compilationOptions": {
     "emitEntryPoint": true
   },
-
-  "userSecretsId": "aspnet5-ObscureDesign.Management-20160224093704",
 
   "dependencies": {
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
@@ -32,7 +32,8 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting"
+    "web": "Microsoft.AspNet.Hosting",
+    "ef": "EntityFramework.Commands"
   },
 
   "frameworks": {
