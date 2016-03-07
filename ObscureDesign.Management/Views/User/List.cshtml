@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<UserModel>
+@{
+    ViewBag.Title = "User management";
+}
 
 <div class="row">
     <div class="col-md-12">
-        <h2>User management</h2>
-        <table>
+        <table class="table table-striped">
             <thead>
-                <tr>@Html.NameFor(model => model.FirstOrDefault().Id)</tr>
-                <tr>@Html.NameFor(model => model.FirstOrDefault().DisplayName)</tr>
-                <tr>@Html.NameFor(model => model.FirstOrDefault().Email)</tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DisplayName)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Email)</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach (var user in Model)

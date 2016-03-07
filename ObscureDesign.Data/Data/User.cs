@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.Entity;
 
 namespace ObscureDesign.Data
 {
@@ -42,4 +43,13 @@ namespace ObscureDesign.Data
     //{
     //    MedalOfHodor = 0x01,
     //}
+
+    public static class UserExtensions
+    {
+        public static User Find(this DbSet<User> source, int id)
+        {
+            return source.FirstOrDefault(u => u.UserId == id);
+        }
+    }
+
 }

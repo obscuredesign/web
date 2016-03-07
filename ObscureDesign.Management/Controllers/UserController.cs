@@ -19,9 +19,17 @@ namespace ObscureDesign.Management.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View();
+            var model = Context.Users.Find(id).ToViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UserModel model)
+        {
+            return RedirectToAction(nameof(List));
         }
     }
 }
