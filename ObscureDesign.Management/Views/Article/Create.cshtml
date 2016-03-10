@@ -1,0 +1,57 @@
+﻿@model ArticleModel
+@{
+    ViewBag.Title = "Create article";
+}
+
+<form asp-controller="Article" asp-action="Create" method="post">
+
+    <div class="row">
+        <div class="col-xs-8 col-sm-9">
+            <div class="form-group">
+                <label asp-for="Title">@Html.DisplayNameFor(model => model.Title)</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug">@Html.DisplayNameFor(model => model.Slug)</label>
+                <input asp-for="Slug" class="form-control" />
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-3">
+            <div class="form-group">
+                <label asp-for="Created">@Html.DisplayNameFor(model => model.Created)</label>
+                <input asp-for="Created" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Published">@Html.DisplayNameFor(model => model.Published)</label>
+                <input asp-for="Published" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Abstract">@Html.DisplayNameFor(model => model.Abstract)</label>
+                <textarea asp-for="Abstract" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content">@Html.DisplayNameFor(model => model.Content)</label>
+                <textarea asp-for="Content" class="form-control" rows="20"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Conclusion">@Html.DisplayNameFor(model => model.Conclusion)</label>
+                <textarea asp-for="Conclusion" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="col-md-4">
+            @*Here comes the processors...*@
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </div>
+
+</form>

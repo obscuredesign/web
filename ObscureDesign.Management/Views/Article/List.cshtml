@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ArticleModel>
+@{
+    ViewBag.Title = "Article management";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Author)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Created)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Published)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var article in Model)
+                {
+                    <tr>
+                        <td><a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id">@article.Id</a></td>
+                        <td>@article.Title</td>
+                        <td>@article.Author.DisplayName</td>
+                        <td>@article.Created</td>
+                        <td>@article.Published</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

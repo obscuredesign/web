@@ -41,6 +41,10 @@ namespace ObscureDesign.Data.Migrations
 
                     b.Property<DateTime?>("Published");
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);

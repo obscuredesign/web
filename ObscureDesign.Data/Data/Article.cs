@@ -51,4 +51,9 @@ namespace ObscureDesign.Data
             return builder;
         }
     }
+
+    public static class ArticleServices
+    {
+        //public static
+    }
 }

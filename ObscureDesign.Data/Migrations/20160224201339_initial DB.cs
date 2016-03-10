@@ -43,6 +43,7 @@ namespace ObscureDesign.Data.Migrations
                     ArticleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: false),
+                    Slug = table.Column<string>(nullable: false),
                     Abstract = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: false),
                     Conclusion = table.Column<string>(nullable: false),

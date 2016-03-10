@@ -19,7 +19,7 @@ namespace ObscureDesign.Data
         [Required]
         public string CertificateThumbrint { get; set; }
     }
-    
+
     [Flags]
     public enum Permission : int
     {
@@ -38,18 +38,21 @@ namespace ObscureDesign.Data
         CommentAward = 0x400,
     }
 
-    //[Flags]
-    //public enum Badge : int
-    //{
-    //    MedalOfHodor = 0x01,
-    //}
-
-    public static class UserExtensions
+    /// <summary>
+    /// Service layer for User
+    /// </summary>
+    public static class UserServices
     {
         public static User Find(this DbSet<User> source, int id)
         {
             return source.FirstOrDefault(u => u.UserId == id);
         }
-    }
 
+        public static User Update(this User source, string displayName, string email)
+        {
+            source.DisplayName = displayName;
+            source.Email = email;
+            return source;
+        }
+    }
 }

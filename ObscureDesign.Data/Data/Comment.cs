@@ -27,9 +27,9 @@ namespace ObscureDesign.Data
     [Flags]
     public enum Award : int
     {
-        Hodor = 0x01,
-        CargoCult = 0x02,
-        Approved = 0x04,
+        MedaOfHodor = 0x01,
+        CargoCultist = 0x02,
+        SealOfApproval = 0x04,
         Trolled = 0x08,
         Cancer = 0x16,
         Dickbutt = 0x32,

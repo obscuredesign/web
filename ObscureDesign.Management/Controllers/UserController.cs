@@ -10,8 +10,7 @@ namespace ObscureDesign.Management.Controllers
 {
     public class UserController : Controller
     {
-        [FromServices]
-        public AppDbContext Context { get; set; }
+        [FromServices] public AppDbContext Context { get; set; }
 
         public IActionResult List()
         {
@@ -29,6 +28,8 @@ namespace ObscureDesign.Management.Controllers
         [HttpPost]
         public IActionResult Edit(UserModel model)
         {
+            Context.Users.Find(model.Id)?.Update(model.DisplayName, model.Email);
+            Context.SaveChanges();
             return RedirectToAction(nameof(List));
         }
     }
