@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ObscureDesign.Processors;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace ObscureDesign.Management.Models
 {
     public class ArticleModel
     {
+        #region View management
+
+        public ArticleModelEditViewManagement EditViewManagement { get; set; }
+
+        #endregion
+
         public int Id { get; set; }
         public string Title { get; set; }
         [Display(Name = "Url slug")]
@@ -17,6 +25,8 @@ namespace ObscureDesign.Management.Models
         public string Content { get; set; }
         public string Conclusion { get; set; }
 
+        public Dictionary<string, int?> Postprocessors { get; set; }
+
         public DateTime? Created { get; set; }
         public DateTime? Updated { get; set; }
         public DateTime? Published { get; set; }
@@ -24,6 +34,39 @@ namespace ObscureDesign.Management.Models
         public UserModel Author { get; set; }
 
         public List<string> Tags { get; set; }
+
+        public IEnumerable<string> GetActiveProcessorNames() => Postprocessors
+            .Where(pp => pp.Value != null)
+            .OrderBy(pp => pp.Value)
+            .Select(pp => pp.Key);
+    }
+
+    public class ArticleModelEditViewManagement
+    {
+        public ArticleModelEditViewManagement(IQueryable<Data.User> users)
+        {
+            AvailablePostprocessors = ProcessorHelper.GetPostprocessors()
+                .ToDictionary(ppType => ppType.AssemblyQualifiedName, ppType => ppType.GetProcessorDisplayName());
+
+            AvailableAuthors =
+                new SelectListItem[]
+                {
+                    new SelectListItem
+                    {
+                        Value = null,
+                        Text = string.Empty,
+                    }
+                }.Concat(
+                    users.Select(u => new SelectListItem
+                    {
+                        Value = u.UserId.ToString(),
+                        Text = u.DisplayName,
+                    })
+                );
+        }
+
+        public Dictionary<string, string> AvailablePostprocessors { get; }
+        public IEnumerable<SelectListItem> AvailableAuthors { get; }
     }
 
     public static class ArticleModelExtensions
@@ -55,7 +98,7 @@ namespace ObscureDesign.Management.Models
             //    //Abstract = includeContent ? article.Abstract : null,
             //    //Content = includeContent ? article.Content : null,
             //    //Conclusion = includeContent ? article.Conclusion : null,
-            //    //TODO processors
+            //    Postprocessors = ?
             //    Created = article.Created,
             //    Updated = article.Updated,
             //    Published = article.Published,

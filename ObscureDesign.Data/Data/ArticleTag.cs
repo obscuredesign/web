@@ -16,12 +16,25 @@ namespace ObscureDesign.Data
         public Tag Tag { get; set; }
     }
 
-    public static class ArticleTagExtensions
+    internal static class ArticleTagExtensions
     {
         public static ModelBuilder BuildArticleTag(this ModelBuilder builder)
         {
             builder.Entity<ArticleTag>().HasKey(at => new { at.TagId, at.ArticleId });
             return builder;
+        }
+    }
+
+    public static class ArticleTagServices
+    {
+        public static void Connect(this DbSet<ArticleTag> source, Article article, IQueryable<Tag> tags)
+        {
+            var articleTags = tags.Select(t => new ArticleTag
+            {
+                ArticleId = article.ArticleId,
+                TagId = t.TagId,
+            }).ToList();
+            source.AddRange(articleTags);
         }
     }
 }

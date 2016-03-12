@@ -27,7 +27,7 @@ namespace ObscureDesign.Data
         public string Conclusion { get; set; }
 
         [Required]
-        public string PreprocessorAQM { get; set; }
+        public string PreprocessorAQM { get; set; } //TODO: remove
         [Required]
         public string PostprocessorAQM { get; set; }
 
@@ -43,7 +43,7 @@ namespace ObscureDesign.Data
         //TODO: QR code      
     }
 
-    public static class ArticleExtensions
+    internal static class ArticleExtensions
     {
         public static ModelBuilder BuildArticle(this ModelBuilder builder)
         {

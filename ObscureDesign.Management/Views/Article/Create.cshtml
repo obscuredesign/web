@@ -44,7 +44,23 @@
             </div>
         </div>
         <div class="col-md-4">
-            @*Here comes the processors...*@
+            <div class="form-group">
+                <label asp-for="Author.Id">@Html.DisplayNameFor(model => model.Author)</label>
+                <select asp-for="Author.Id" asp-items="Model.EditViewManagement.AvailableAuthors" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Postprocessors" style="width: 100%;">@Html.DisplayNameFor(model => model.Postprocessors)</label>
+                <select class="ObscureDesign_Management_Article_Postprocessors" multiple="multiple">
+                    @foreach (var postprocessor in Model.EditViewManagement.AvailablePostprocessors)
+                    {
+                        <option value="@postprocessor.Key">@postprocessor.Value</option>
+                    }
+                </select>
+                @foreach (var postprocessor in Model.EditViewManagement.AvailablePostprocessors)
+                {
+                    <input type="hidden" asp-for="Postprocessors[postprocessor.Key]" />
+                }
+            </div>
         </div>
     </div>
 

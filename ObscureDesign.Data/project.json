@@ -1,7 +1,7 @@
 {
   "version": "0.1-beta",
   "description": "obscure.desgin web pages database model",
-  "authors": [ "Jiøí Veselka", "Jan Petøvalský" ],
+  "authors": [ "Jiï¿½ï¿½ Veselka", "Jan Petï¿½valskï¿½" ],
   "projectUrl": "https://github.com/obscuredesign/web",
   "licenseUrl": "https://github.com/obscuredesign/web/blob/master/LICENSE",
   "tags": [ "" ],
@@ -19,6 +19,8 @@
   "dependencies": {
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final"
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
+    "System.ComponentModel": "4.0.1-beta-23516",
+    "System.Reflection": "4.1.0-beta-23516"
   }
 }

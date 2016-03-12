@@ -16,7 +16,7 @@ namespace ObscureDesign.Data
         public Award Awards { get; set; }
 
         [Required]
-        public string PreprocessorAQM { get; set; }
+        public string PreprocessorAQM { get; set; } //TODO: remove
         [Required]
         public string PostprocessorAQM { get; set; }
 
