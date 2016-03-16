@@ -25,9 +25,7 @@ namespace ObscureDesign.Data
         public string Content { get; set; }
         [Required]
         public string Conclusion { get; set; }
-
-        [Required]
-        public string PreprocessorAQM { get; set; } //TODO: remove
+        
         [Required]
         public string PostprocessorAQM { get; set; }
 
