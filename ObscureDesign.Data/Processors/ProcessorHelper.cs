@@ -43,10 +43,21 @@ namespace ObscureDesign.Processors
         private static Type CreateProcessor<T>(IEnumerable<string> processorAQNs) => processorAQNs
             .Select(pp => Type.GetType(pp, throwOnError: true, ignoreCase: true))
             .ImplementsInterface<T>(throwOnMismatch: true) //security thingy
-            .Reverse()
             .Aggregate(typeof(CopyContent), (current, next) => next.MakeGenericType(current));
 
         public static Type CreatePreprocessor(IEnumerable<string> processorAQNs) => CreateProcessor<IPreprocessor>(processorAQNs);
         public static Type CreatePostprocessor(IEnumerable<string> processorAQNs) => CreateProcessor<IPostprocessor>(processorAQNs);
+
+        public static IEnumerable<string> DestructPostprocessor(Type postprocessor)
+        {
+            var types = new List<Type>();
+            Type current = postprocessor;
+            while (current != typeof(CopyContent))
+            {
+                types.Add(current.GetGenericTypeDefinition());
+                current = current.GetGenericArguments()[0];
+            }
+            return types.Select(t => t.AssemblyQualifiedName).ToList();
+        }
     }
 }

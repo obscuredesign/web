@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using ObscureDesign.Data;
 using ObscureDesign.Management.Models;
 using ObscureDesign.Processors;
@@ -36,31 +38,30 @@ namespace ObscureDesign.Management.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Here we should probably create transaction or something
-                
-                var article = new Article
+                using (var transaction = Context.Database.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    Title = model.Title,
-                    Slug = model.Slug,
-                    Abstract = model.Abstract ?? string.Empty,
-                    Content = model.Content ?? string.Empty,
-                    Conclusion = model.Conclusion ?? string.Empty,
-                    PreprocessorAQM = ProcessorHelper.CreatePreprocessor(new string[0]).AssemblyQualifiedName,
-                    PostprocessorAQM = ProcessorHelper.CreatePostprocessor(model.GetActiveProcessorNames()).AssemblyQualifiedName,
-                    Created = model.Created,
-                    Updated = DateTime.UtcNow,
-                    Published = model.Published,
-                    AuthorId = model.Author.Id,
-                };
-                Context.Articles.Add(article);
-                Context.SaveChanges();
+                    var article = Context.Articles.Create(
+                        title: model.Title,
+                        urlSlug: model.Slug,
+                        authorId: model.Author.Id,
+                        postprocessorAQNs: model.GetActiveProcessorNames(),
+                        created: model.Created,
+                        published: model.Published,
+                        textAbstract: model.Abstract,
+                        textContent: model.Content,
+                        textConclusion: model.Conclusion
+                    );
+                    Context.SaveChanges();
 
-                //Context.Tags.MergeAll(model.Tags);
-                //Context.SaveChanges();
+                    Context.Tags.CreateAllIfNotExists(model.Tags);
+                    Context.SaveChanges();
 
-                //var tags = Context.Tags.Search(model.Tags);
-                //Context.ArticleTags.Connect(article, tags);
-                //Context.SaveChanges();
+                    var tags = Context.Tags.SearchAll(model.Tags);
+                    Context.ArticleTags.ConnectTagsToArticle(article, tags);
+                    Context.SaveChanges();
+
+                    transaction.Commit();
+                }
 
                 return RedirectToAction(nameof(List));
             }

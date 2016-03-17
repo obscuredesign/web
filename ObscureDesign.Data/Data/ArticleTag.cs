@@ -27,7 +27,7 @@ namespace ObscureDesign.Data
 
     public static class ArticleTagServices
     {
-        public static void Connect(this DbSet<ArticleTag> source, Article article, IQueryable<Tag> tags)
+        public static void ConnectTagsToArticle(this DbSet<ArticleTag> source, Article article, IQueryable<Tag> tags)
         {
             var articleTags = tags.Select(t => new ArticleTag
             {

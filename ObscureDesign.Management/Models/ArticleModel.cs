@@ -17,12 +17,17 @@ namespace ObscureDesign.Management.Models
         #endregion
 
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         [Display(Name = "Url slug")]
         public string Slug { get; set; }
 
+        [Required]
         public string Abstract { get; set; }
+        [Required]
         public string Content { get; set; }
+        [Required]
         public string Conclusion { get; set; }
 
         public Dictionary<string, int?> Postprocessors { get; set; }
@@ -33,6 +38,10 @@ namespace ObscureDesign.Management.Models
 
         public UserModel Author { get; set; }
 
+        [Required]
+        public int AuthorId { get; set; }
+
+        [Required]
         public List<string> Tags { get; set; }
 
         public IEnumerable<string> GetActiveProcessorNames() => Postprocessors
@@ -48,21 +57,8 @@ namespace ObscureDesign.Management.Models
             AvailablePostprocessors = ProcessorHelper.GetPostprocessors()
                 .ToDictionary(ppType => ppType.AssemblyQualifiedName, ppType => ppType.GetProcessorDisplayName());
 
-            AvailableAuthors =
-                new SelectListItem[]
-                {
-                    new SelectListItem
-                    {
-                        Value = null,
-                        Text = string.Empty,
-                    }
-                }.Concat(
-                    users.Select(u => new SelectListItem
-                    {
-                        Value = u.UserId.ToString(),
-                        Text = u.DisplayName,
-                    })
-                );
+            AvailableAuthors = users
+                .Select(u => new SelectListItem { Value = u.UserId.ToString(), Text = u.DisplayName, });
         }
 
         public Dictionary<string, string> AvailablePostprocessors { get; }
@@ -80,11 +76,13 @@ namespace ObscureDesign.Management.Models
                 Slug = article.Slug,
                 Abstract = article.Abstract,
                 Content = article.Content,
-                Conclusion =  article.Conclusion,
+                Conclusion = article.Conclusion,
+                Postprocessors = ProcessorHelper.DestructPostprocessor(Type.GetType(article.PostprocessorAQM, true, true)).ToDictionary(x => x, x => (int?)null),
                 Created = article.Created,
                 Updated = article.Updated,
                 Published = article.Published,
                 Author = article.Author.ToViewModel(),
+                AuthorId = article.AuthorId,
                 Tags = article.ArticleTags.Select(at => at.Tag.Name).ToList(),
             });
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ObscureDesign.Processors;
 
 namespace ObscureDesign.Data
 {
@@ -52,6 +53,36 @@ namespace ObscureDesign.Data
 
     public static class ArticleServices
     {
-        //public static
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Article Create(this DbSet<Article> source,
+            string title,
+            string urlSlug,
+            int authorId,
+            string textAbstract = null,
+            string textContent = null,
+            string textConclusion = null,
+            IEnumerable<string> postprocessorAQNs = null,
+            DateTime? created = null,
+            DateTime? updated = null,
+            DateTime? published = null)
+        {
+            var article = new Article
+            {
+                Title = title,
+                Slug = urlSlug,
+                Abstract = textAbstract ?? string.Empty,
+                Content = textContent ?? string.Empty,
+                Conclusion = textConclusion ?? string.Empty,
+                PostprocessorAQM = ProcessorHelper.CreatePostprocessor(postprocessorAQNs).AssemblyQualifiedName,
+                Created = created,
+                Updated = updated ?? DateTime.UtcNow,
+                Published = published,
+                AuthorId = authorId,
+            };
+            source.Add(article);
+            return article;
+        }
     }
 }

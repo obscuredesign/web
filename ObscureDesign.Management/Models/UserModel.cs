@@ -8,8 +8,10 @@ namespace ObscureDesign.Management.Models
 {
     public class UserModel
     {
+        [Required]
         [Display(Name = "Id")]
         public int Id { get; set; }
+        [Required]
         [Display(Name = "Display name")]
         public string DisplayName { get; set; }
         [Display(Name = "Email")]

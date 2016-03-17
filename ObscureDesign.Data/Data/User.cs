@@ -43,11 +43,17 @@ namespace ObscureDesign.Data
     /// </summary>
     public static class UserServices
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static User Find(this DbSet<User> source, int id)
         {
             return source.FirstOrDefault(u => u.UserId == id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static User Update(this User source, string displayName, string email)
         {
             source.DisplayName = displayName;

@@ -8,6 +8,10 @@
     "jquery-validation-unobtrusive": "3.2.4",
     "font-awesome": "4.4.0",
     "bootstrap-datepicker": "1.4.1",
-    "bootstrap-multiselect": "~0.9.13"
+    "bootstrap-multiselect": "~0.9.13",
+    "bootstrap-tagsinput": "~0.8.0"
+  },
+  "resolutions": {
+    "jquery": ">=1.7.1"
   }
 }
