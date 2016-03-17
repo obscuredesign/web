@@ -80,6 +80,7 @@
             <div class="form-group">
                 <div>
                     <label asp-for="Tags">@Html.DisplayNameFor(model => model.Tags)</label>
+                    @Html.ValidationMessageFor(model => model.Tags)
                 </div>
                 <select asp-for="Tags" data-role="tagsinput">
                 </select>

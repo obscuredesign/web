@@ -48,10 +48,10 @@ namespace ObscureDesign.Processors
         public static Type CreatePreprocessor(IEnumerable<string> processorAQNs) => CreateProcessor<IPreprocessor>(processorAQNs);
         public static Type CreatePostprocessor(IEnumerable<string> processorAQNs) => CreateProcessor<IPostprocessor>(processorAQNs);
 
-        public static IEnumerable<string> DestructPostprocessor(Type postprocessor)
+        public static IEnumerable<string> DestructProcessor(Type processor)
         {
             var types = new List<Type>();
-            Type current = postprocessor;
+            Type current = processor;
             while (current != typeof(CopyContent))
             {
                 types.Add(current.GetGenericTypeDefinition());

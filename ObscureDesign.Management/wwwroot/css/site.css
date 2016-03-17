@@ -23,3 +23,8 @@
 	color: hotpink;
 	font-style: italic;
 }
+
+.bootstrap-tagsinput .tag {
+	font-size: inherit;
+	background: rgb(51, 122, 183);
+}

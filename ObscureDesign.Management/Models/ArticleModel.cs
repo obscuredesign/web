@@ -31,6 +31,7 @@ namespace ObscureDesign.Management.Models
         public string Conclusion { get; set; }
 
         public Dictionary<string, int?> Postprocessors { get; set; }
+        public string PostprocessorAQNs { get; set; }
 
         public DateTime? Created { get; set; }
         public DateTime? Updated { get; set; }
@@ -74,35 +75,28 @@ namespace ObscureDesign.Management.Models
                 Id = article.ArticleId,
                 Title = article.Title,
                 Slug = article.Slug,
+                // this should work if not for EF bugs with ternary operator
+                //Abstract = includeContent ? article.Abstract : null,
+                //Content = includeContent ? article.Content : null,
+                //Conclusion = includeContent ? article.Conclusion : null,
                 Abstract = article.Abstract,
                 Content = article.Content,
                 Conclusion = article.Conclusion,
-                Postprocessors = ProcessorHelper.DestructPostprocessor(Type.GetType(article.PostprocessorAQM, true, true)).ToDictionary(x => x, x => (int?)null),
+                PostprocessorAQNs = article.PostprocessorAQM,
                 Created = article.Created,
                 Updated = article.Updated,
                 Published = article.Published,
                 Author = article.Author.ToViewModel(),
                 AuthorId = article.AuthorId,
+                //Tags = includeTags ? article.ArticleTags.Select(at => at.Tag.Name).ToList() : null,
                 Tags = article.ArticleTags.Select(at => at.Tag.Name).ToList(),
+            })
+            .AsEnumerable() // out of DB
+            .Select(a =>
+            {
+                a.Postprocessors = ProcessorHelper.DestructProcessor(Type.GetType(a.PostprocessorAQNs, true, true)).ToDictionary(k => k, e => (int?)null);
+                return a;
             });
-
-            // this should work if not for EF bugs with ternary operator
-
-            //return source.Select(article => new ArticleModel
-            //{
-            //    Id = article.ArticleId,
-            //    Title = article.Title,
-            //    Slug = article.Slug,
-            //    //Abstract = includeContent ? article.Abstract : null,
-            //    //Content = includeContent ? article.Content : null,
-            //    //Conclusion = includeContent ? article.Conclusion : null,
-            //    Postprocessors = ?
-            //    Created = article.Created,
-            //    Updated = article.Updated,
-            //    Published = article.Published,
-            //    Author = article.Author.ToViewModel(),
-            //    //Tags = includeTags ? article.ArticleTags.Select(at => at.Tag.Name).ToList() : null,
-            //});
         }
     }
 }

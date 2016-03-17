@@ -43,7 +43,7 @@ namespace ObscureDesign.Management.Controllers
                     var article = Context.Articles.Create(
                         title: model.Title,
                         urlSlug: model.Slug,
-                        authorId: model.Author.Id,
+                        authorId: model.AuthorId,
                         postprocessorAQNs: model.GetActiveProcessorNames(),
                         created: model.Created,
                         published: model.Published,
